@@ -4,30 +4,42 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tetris</title>
+  <meta name="description"
+    content="Play Tetris for free. Browser-based online Tetris game. Play Tetris game online for free on mobiles and tablets. No downloads or installation needed, enjoy! Are you a Tetris lover? Do you want to try some classic puzzle game? Then you can play our new game Tetris! The basic rule of Tetris is to move, rotate and place all kinds of automatic outputted Tetris in a complete line to eliminate them and get points. See how long you can survive in this game Tetris!">
+  <meta itemprop="description"
+    content="Play Tetris for free. Browser-based online Tetris game. Play Tetris game online for free on mobiles and tablets. No downloads or installation needed, enjoy! Are you a Tetris lover? Do you want to try some classic puzzle game? Then you can play our new game Tetris! The basic rule of Tetris is to move, rotate and place all kinds of automatic outputted Tetris in a complete line to eliminate them and get points. See how long you can survive in this game Tetris!">
+  <meta itemprop="name" content="Play Tetris | Free Online Game">
+  <meta name="Keywords" content="Tetris, Arcade Games, Classic video games, Tetris game, Tetris mobile game">
+  <title>Tetris на Javascript</title>
+  <link rel="apple-touch-icon" href="favicon.png" />
+  <link rel="icon" href="favicon.png" type="image/x-icon" />
   <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
-  <div id="game">
-    <button id="pause">Start</button>
-    <div class="info">
-      <div class="info-stage">
-        <div>Level: <span id="level">0</span></div>
-        <div>Score: <span id="score">0</span></div>
+  <div class="container">
+    <div id="game">
+      <button id="pause">Start</button>
+      <div class="info">
+        <div class="info-stage">
+          <div>Level: <span id="level">0</span></div>
+          <div>Score: <span id="score">0</span></div>
+        </div>
+        <div id="next-tetro"></div>
       </div>
-      <div id="next-tetro"></div>
-    </div>
-    <div class="main"></div>
-      <div class="arrow-up">
-        <img src="img/Arrow_up.png" alt="Arrow up">
-      </div>
+      <div class="main"></div>
       <div class="arrows">
-        <img src="img/Arrow_left.png" alt="Arrow left">
-        <img src="img/Arrow_down.png" alt="Arrow down">
-      <img src="img/Arrow_right.png" alt="Arrow right">
-      </div> 
-    <div id="game-over">Game over</div>
+        <div class="arrow-up"> <span id="arrow-up"></span></div>
+        <span id="arrow-left"></span>
+        <span id="arrow-down"></span>
+        <span id="arrow-right"></span>
+      </div>
+      <div id="game-over">Game over</div>
+    </div>
+    <div class="instruction">
+      <img src="img/controls.png" alt="keyboard controls">
+      <img src="img/space.png" alt="keyboard space controls">
+    </div>
   </div>
   <script src="script.js"></script>
 </body>
