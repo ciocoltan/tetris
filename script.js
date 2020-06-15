@@ -8,8 +8,7 @@ const arrowUp = document.getElementById("arrow-up");
 const arrowLeft = document.getElementById("arrow-left");
 const arrowDown = document.getElementById("arrow-down");
 const arrowRight = document.getElementById("arrow-right");
-
-
+const spaceBtn = document.getElementById("space");
 const col = 10,
   row = 20,
   possibleLevels = {
@@ -42,38 +41,38 @@ const col = 10,
   figures = {
     O: [
       [1, 1],
-      [1, 1]
+      [1, 1],
     ],
     I: [
       [0, 0, 0, 0],
       [1, 1, 1, 1],
       [0, 0, 0, 0],
-      [0, 0, 0, 0]
+      [0, 0, 0, 0],
     ],
     S: [
       [0, 1, 1],
       [1, 1, 0],
-      [0, 0, 0]
+      [0, 0, 0],
     ],
     Z: [
       [1, 1, 0],
       [0, 1, 1],
-      [0, 0, 0]
+      [0, 0, 0],
     ],
     L: [
       [1, 0, 0],
       [1, 1, 1],
-      [0, 0, 0]
+      [0, 0, 0],
     ],
     J: [
       [0, 0, 1],
       [1, 1, 1],
-      [0, 0, 0]
+      [0, 0, 0],
     ],
     T: [
       [1, 1, 1],
       [0, 1, 0],
-      [0, 0, 0]
+      [0, 0, 0],
     ],
   };
 let score = 0,
@@ -89,22 +88,62 @@ let activeTetro = getNewTetro();
 let nextTetro = getNewTetro();
 draw();
 
-arrowUp.addEventListener("click", rotateTetro, false);
-arrowDown.addEventListener("click", moveTetroDown, false);
-arrowRight.addEventListener("click", () => {
-  activeTetro.x += 1;
-  if (hasCollisions()) {
-    activeTetro.x -= 1;
-  }
-}, false);
-arrowLeft.addEventListener("click", () => {
-  activeTetro.x -= 1;
-  if (hasCollisions()) {
-    activeTetro.x += 1;
-  }
-}, false);
-
-
+arrowUp.addEventListener(
+  "click",
+  () => {
+    if (!isPaused) {
+      rotateTetro();
+      updateGameState();
+    }
+  },
+  false
+);
+arrowDown.addEventListener(
+  "click",
+  () => {
+    if (!isPaused) {
+      moveTetroDown();
+      updateGameState();
+    }
+  },
+  false
+);
+arrowRight.addEventListener(
+  "click",
+  () => {
+    if (!isPaused) {
+      activeTetro.x += 1;
+      if (hasCollisions()) {
+        activeTetro.x -= 1;
+      }
+      updateGameState();
+    }
+  },
+  false
+);
+arrowLeft.addEventListener(
+  "click",
+  () => {
+    if (!isPaused) {
+      activeTetro.x -= 1;
+      if (hasCollisions()) {
+        activeTetro.x += 1;
+      }
+      updateGameState();
+    }
+  },
+  false
+);
+spaceBtn.addEventListener(
+  "click",
+  () => {
+    if (!isPaused) {
+      dropTetro();
+      updateGameState();
+    }
+  },
+  false
+);
 pauseBtn.addEventListener(
   "click",
   (e) => {
@@ -298,7 +337,9 @@ function getNewTetro() {
 function fixTetro() {
   for (let y = activeTetro.y; y < playfield.length; y++) {
     for (
-      let x = activeTetro.x; x < activeTetro.x + activeTetro.shape.length; x++
+      let x = activeTetro.x;
+      x < activeTetro.x + activeTetro.shape.length;
+      x++
     ) {
       if (playfield[y][x] === 1) {
         playfield[y][x] = 2;
@@ -347,8 +388,12 @@ document.addEventListener(
       } else if (e.keyCode === 40) {
         moveTetroDown();
       } else if (e.keyCode === 38) {
+        e.preventDefault();
+        e.stopPropagation();
         rotateTetro();
       } else if (e.keyCode === 32) {
+        e.preventDefault();
+        e.stopPropagation();
         dropTetro();
       }
       updateGameState();
